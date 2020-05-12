@@ -8,11 +8,12 @@ public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
         String s = scanner.nextLine();
 
-        long n = scanner.nextLong();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-        long result = repeatedString("aba", 10);
+        int result = countingValleys(n, s);
         System.out.println(result);
 
         bufferedWriter.write(String.valueOf(result));
@@ -23,29 +24,21 @@ public class Solution {
         scanner.close();
     }
 
-    // Complete the repeatedString function below.
-    static long repeatedString(String s, long n) {
-        if (!s.contains("a")) return 0;
+    // Complete the countingValleys function below.
+    static int countingValleys(int n, String s) {
+        int seaLevel = 0;
+        int prevSeaLevel;
+        int countOfValleys = 0;
 
-        long countOfAInS = countA(s);
+        for (int i = 0; i < n; i++) {
+            prevSeaLevel = seaLevel;
+            seaLevel = s.charAt(i) == 'U' ? ++seaLevel : --seaLevel;
 
-        if (countA(s) == s.length()) {
-            return n;
+            if (seaLevel == 0 && prevSeaLevel < 1) {
+                countOfValleys += 1;
+            }
         }
 
-        if (n % s.length() == 0) {
-            return countOfAInS * (n / s.length());
-        } else {
-            long rem = n % s.length();
-            long rep = n / s.length();
-            String substr = s.substring(0, (int) rem);
-            long countOfAInSubstr = countA(substr);
-
-            return countOfAInS * rep + countOfAInSubstr;
-        }
-    }
-
-    static long countA(String s) {
-        return s.length() - s.replace("a", "").length();
+        return countOfValleys;
     }
 }
