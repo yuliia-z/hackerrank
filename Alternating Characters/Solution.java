@@ -3,12 +3,6 @@ import java.util.*;
 
 public class Solution {
 
-    // Complete the alternatingCharacters function below.
-    static int alternatingCharacters(String s) {
-
-
-    }
-
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
@@ -29,5 +23,16 @@ public class Solution {
         bufferedWriter.close();
 
         scanner.close();
+    }
+
+    // Complete the alternatingCharacters function below.
+    static int alternatingCharacters(String s) {
+        int minDel = 0;
+
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i) == s.charAt(i + 1)) minDel += 1;
+        }
+
+        return minDel;
     }
 }
