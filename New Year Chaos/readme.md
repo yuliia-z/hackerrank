@@ -1,2 +1,2 @@
-# Minimum Time Required
-Source: https://www.hackerrank.com/challenges/minimum-time-required
+# New Year Chaos
+Source: https://www.hackerrank.com/challenges/new-year-chaos
